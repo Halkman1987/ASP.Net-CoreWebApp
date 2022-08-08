@@ -24,7 +24,20 @@
         {
             string logMess = $"[{DateTime.Now}]: New request to http://{context.Request.Host.Value + context.Request.Path}{Environment.NewLine}";
             string logFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Logs", "RequestLog.txt");
-            await File.AppendAllTextAsync(logFilePath, logMess);
-        }
+            //await File.AppendAllTextAsync(logFilePath, logMess);
+
+
+            string dest_path = xml_destination_path_tb.Text + "/" + corps + " корпус/" + floor + " этаж/" + cabinet + " кабинет";
+            
+            if (Directory.Exists(logFilePath) != true) Directory.CreateDirectory(logFilePath);
+            try
+            {
+                File.Copy(filename, dest_path + "/" + Path.GetFileName(filename));
+            }
+            catch (IOException copyError)
+            {
+                MessageBox.Show(copyError.Message);
+            }
+        } 
     }
 }

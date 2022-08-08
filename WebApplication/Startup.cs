@@ -5,23 +5,23 @@ namespace WebApplication
 {
     public class Startup
     {
-        IWebHostEnvironment _env;
+        public static IWebHostEnvironment _env;
         public Startup(IWebHostEnvironment env)
         {
             _env = env;
         }
-        private static void About(IApplicationBuilder app, IWebHostEnvironment env)
+        private static void About(IApplicationBuilder app)
         {
             app.Run(async context =>
             {
-                await context.Response.WriteAsync($"{env.ApplicationName}- ASP.Net Core tutoral project");
+                await context.Response.WriteAsync($"{_env.ApplicationName}- ASP.Net Core tutoral project");
             });
         }
-        private static void Config(IApplicationBuilder app, IWebHostEnvironment env)
+        private static void Config(IApplicationBuilder app)
         {
             app.Run(async context =>
             {
-                await context.Response.WriteAsync($"App name: {env.ApplicationName}. App running configuration: {env.EnvironmentName}");
+                await context.Response.WriteAsync($"App name: {_env.ApplicationName}. App running configuration: {_env.EnvironmentName}");
             });
         }
         public void ConfigureServices(IServiceCollection services)
